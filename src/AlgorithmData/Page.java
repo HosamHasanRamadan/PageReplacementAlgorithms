@@ -6,7 +6,7 @@ public class Page  {
     private int pageNumber = -1;
     private int frameNumber = -1;
     private int count = 0 ;
-    private boolean dirtBit = false;
+    private boolean dirtyBit = false;
 
     public Page(int pageNumber) {
         this.pageNumber = pageNumber;
@@ -29,15 +29,15 @@ public class Page  {
         this.frameNumber = frameNumber;
     }
 
-    public boolean getDirtBit() {
-        return dirtBit;
+    public boolean getDirtyBit() {
+        return dirtyBit;
     }
 
-    public void setUsageTime() {
-        this.dirtBit = true ;
+    public void setDirtyBit() {
+        this.dirtyBit = true ;
     }
-    public void resetUsageTime() {
-        this.dirtBit = false ;
+    public void resetDirtyBit() {
+        this.dirtyBit = false ;
     }
 
     public void setPageNumber(int pageNumber) {
