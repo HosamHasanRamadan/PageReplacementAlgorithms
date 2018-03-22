@@ -5,6 +5,7 @@ import java.util.Objects;
 public class Page  {
     private int pageNumber = -1;
     private int frameNumber = -1;
+    private int count = 0 ;
     private int usageTime = 0;
 
     public Page(int pageNumber) {
@@ -38,6 +39,14 @@ public class Page  {
 
     public void setPageNumber(int pageNumber) {
         this.pageNumber = pageNumber;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
     }
 
     @Override
