@@ -17,14 +17,32 @@ public class SecondChance extends ReplacementAlgorithm {
         int index = 0;
         if ((index = contains(page)) != -1) {
             state = false;
+            frames[index].setDirtyBit();
             return state;
         } else {
             state = true;
+            index = findIndex();
+            pointer = index;
             page.setFrameNumber(pointer);
             frames[pointer] = page;
             pointer = (pointer + 1) % numberOfFrames;
             return state;
         }
+    }
+    private int  findIndex(){
+        int p = pointer;
+
+        if(frames[p] != null)
+        while(true){
+            if(frames[p].getDirtyBit()){
+                frames[p].resetDirtyBit();
+                p = (p+1) % frames.length;
+            }
+            else {
+                break;
+            }
+        }
+        return p ;
     }
 
 

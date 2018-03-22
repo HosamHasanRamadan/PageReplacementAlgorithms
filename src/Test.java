@@ -4,6 +4,7 @@ import AlgorithmData.*;
 import ReplacementAlgorithms.ReplacementAlgorithm;
 
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Test {
@@ -11,28 +12,26 @@ public class Test {
     private Page[] testSequance ;
     private Random random = new Random() ;
 
-    private ReplacementAlgorithm algorithm ;
+    private Algorithm algorithm ;
 
     private int numberOfFrames  ;
     private int rangeOfPageNumber ;
     private int pagesSequanceLength;
 
-    Test( int numberOfFrames , int pagesSequanceLength ,int rangeOfPageNumber ){
+     Test( int numberOfFrames , int pagesSequanceLength ,int rangeOfPageNumber ){
         this.rangeOfPageNumber = rangeOfPageNumber;
         this.pagesSequanceLength =  pagesSequanceLength;
         this.numberOfFrames = numberOfFrames ;
-        createTestSequance();
+
     }
 
     Test(int numberOfFrames , Page[] pages ,  int rangeOfPageNumber ){
         this(numberOfFrames , pages.length , rangeOfPageNumber );
         testSequance = pages;
+
     }
 
     private void createTestSequance(){
-        if(testSequance != null)
-            return;
-
         testSequance = new Page[pagesSequanceLength];
         for(int count = 0 ; count < pagesSequanceLength ; count++ ){
             int pageNumber = random.nextInt(rangeOfPageNumber);
@@ -41,13 +40,18 @@ public class Test {
         }
     }
 
-    void randomTest(ReplacementAlgorithm algorithm){
+    void randomTest(Algorithm algorithm){
+         if(testSequance == null)
+             createTestSequance();
 
         algorithm = algorithm ;
         for(int count = 0 ; count < pagesSequanceLength ; count++ ){
             Page page = testSequance[count];
-            algorithm.insert(page);
-            algorithm.print();
+            boolean cond = algorithm.insert(page);
+
+            if(cond == true) algorithm.print();
+            else
+                System.out.println();
         }
     }
 
