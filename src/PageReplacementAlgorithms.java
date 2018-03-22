@@ -35,12 +35,12 @@ public class PageReplacementAlgorithms {
             test();
         }
 
-        if(c == 1)
+        if(c != 2)
             test = new Test(numberOfFrames , pages , 1);
-        else
-            test = new Test(numberOfFrames,pagesSequanceLength,rangeOfPageNumber);
-
-        test.createTestSequance();
+        else {
+            test = new Test(numberOfFrames, pagesSequanceLength, rangeOfPageNumber);
+            test.createTestSequance();
+        }
 
         switch (x){
             case 1 : algorithm = new FirstInFirstOut(numberOfFrames); break;
@@ -88,8 +88,8 @@ public class PageReplacementAlgorithms {
 
     public static void test() {
         Integer arr[] = new Integer[]
-                {0, 4, 1, 4, 2, 4, 3, 4, 2, 4, 0, 4, 1, 4, 2, 4, 3, 4};
-        //{7,0,1,2,0,3,0,4,2,3,0,3,0,3,2,1,2,0,1,7,0,1};
+               // {0, 4, 1, 4, 2, 4, 3, 4, 2, 4, 0, 4, 1, 4, 2, 4, 3, 4};
+        {7,0,1,2,0,3,0,4,2,3,0,3,0,3,2,1,2,0,1,7,0,1};
         pages = new Page[arr.length];
         for (int i = 0; i < arr.length; i++) {
             pages[i] = new Page(arr[i]);
