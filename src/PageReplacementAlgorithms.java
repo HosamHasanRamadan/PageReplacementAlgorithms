@@ -16,7 +16,7 @@ public class PageReplacementAlgorithms {
     static int pagesSequanceLength = 0;
     static Page[] pages;
     static Algorithm algorithm;
-    static Test t;
+    static Test test;
 
     public static void main(String args[]) {
 
@@ -32,6 +32,9 @@ public class PageReplacementAlgorithms {
         } else if (c == 2) {
             random();
         }
+        else{
+            test();
+        }
 
         switch (x){
             case 1 : algorithm = new FirstInFirstOut(numberOfFrames); break;
@@ -43,12 +46,12 @@ public class PageReplacementAlgorithms {
         }
 
         if(c == 1)
-            t = new Test(numberOfFrames , pages , 1);
+            test = new Test(numberOfFrames , pages , 1);
         else
-            t = new Test(numberOfFrames,pagesSequanceLength,rangeOfPageNumber);
+            test = new Test(numberOfFrames,pagesSequanceLength,rangeOfPageNumber);
 
 
-        t.randomTest(algorithm);
+        test.randomTest(algorithm);
 
 
 
