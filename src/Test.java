@@ -31,7 +31,7 @@ public class Test {
 
     }
 
-    private void createTestSequance(){
+    public void createTestSequance(){
         testSequance = new Page[pagesSequanceLength];
         for(int count = 0 ; count < pagesSequanceLength ; count++ ){
             int pageNumber = random.nextInt(rangeOfPageNumber);

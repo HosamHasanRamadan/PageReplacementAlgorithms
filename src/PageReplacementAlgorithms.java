@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
-import AlgorithmData.Page;
 
 public class PageReplacementAlgorithms {
 
@@ -36,19 +35,23 @@ public class PageReplacementAlgorithms {
             test();
         }
 
+        if(c == 1)
+            test = new Test(numberOfFrames , pages , 1);
+        else
+            test = new Test(numberOfFrames,pagesSequanceLength,rangeOfPageNumber);
+
+        test.createTestSequance();
+
         switch (x){
             case 1 : algorithm = new FirstInFirstOut(numberOfFrames); break;
-            case 2 : algorithm = new Optimal(pages,numberOfFrames); break;
+            case 2 : algorithm = new Optimal(test.getTestSequance(),numberOfFrames); break;
             case 3 : algorithm = new MostFrequentlyUsed(numberOfFrames); break;
             case 4 : algorithm = new LeastFrequentlyUsed(numberOfFrames); break;
             case 5 : algorithm = new SecondChance(numberOfFrames); break;
             case 6 : algorithm = new LeastFrequentlyUsed(numberOfFrames); break;
         }
 
-        if(c == 1)
-            test = new Test(numberOfFrames , pages , 1);
-        else
-            test = new Test(numberOfFrames,pagesSequanceLength,rangeOfPageNumber);
+
 
 
         test.randomTest(algorithm);
@@ -61,7 +64,7 @@ public class PageReplacementAlgorithms {
     public static void manual() {
         ArrayList<Integer> list = new ArrayList<>();
         System.out.println("Enter Frame Sequance Seperated by Spaces \n" +
-                "Then enter any key to finsh your sequance ex : 1 2 .. h");
+                "Then enter any char to finsh your sequance ex : 1 2 .. h");
         try {
             while (true) {
                 int s = scanner.nextInt();
