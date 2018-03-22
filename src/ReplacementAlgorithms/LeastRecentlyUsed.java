@@ -5,6 +5,7 @@ import AlgorithmData.*;
 public class LeastRecentlyUsed extends ReplacementAlgorithm{
     Page[] pages;
     private int currentPageIndex = -1;
+    int counter = 0;
 
 
     public LeastRecentlyUsed(Page[] pages, int numberOfFrames) {
@@ -18,10 +19,14 @@ public class LeastRecentlyUsed extends ReplacementAlgorithm{
     public boolean insert(Page page) {
         System.out.print(page.getPageNumber() + "--> ");
         currentPageIndex++;
-        if (contains(page)) {
+        counter++;
+        int index = 0;
+        if ((index = contains(page)) != -1) {
+            frames[index].setCount(counter);
             state = false;
         } else {
-            int index = findFrameNumber();
+            index = findFrameNumber();
+            page.setCount(counter);
             frames[index] = page;
             state = true;
         }
@@ -40,46 +45,29 @@ public class LeastRecentlyUsed extends ReplacementAlgorithm{
             }
 
 
-        int PageAccurance = pages.length;
+        int minCount = frames[0].getCount();
         int frameNumber = 0;
 
-        for (int count = 0; count < numberOfFrames; count++) {
-            int currentPageAccurance = findPreAccurance(frames[count]);
-            if (currentPageAccurance == -1) {
-                frameNumber = count;
-                break;
-            }
-            if (currentPageAccurance < PageAccurance) {
-                PageAccurance = currentPageAccurance;
-                frameNumber = count;
-            }
+        for (int count = 1; count < numberOfFrames; count++) {
+            Page p  = frames[count];
+         if(p.getCount() < minCount ) {
+             minCount = p.getCount();
+             frameNumber = count;
+         }
         }
         return frameNumber;
     }
 
-    private int findPreAccurance(Page frame) {
-        int pageNumber = frame.getPageNumber();
-        int preAccurance = -1;
 
-        for (int count = currentPageIndex; count >= 0; count--) {
-            int p = pages[count].getPageNumber();
-            if (pageNumber == p) {
-                preAccurance = count;
+    private int contains(Page page) {
+        for (int count = 0; count < frames.length; count++)
+         {
+            if (frames[count] == null)
                 break;
-            }
+            if (page.equals(frames[count]))
+                return count;
         }
-        return preAccurance;
-
-    }
-
-    private boolean contains(Page page) {
-        for (Page pageFrame : frames) {
-            if (pageFrame == null)
-                break;
-            if (page.equals(pageFrame))
-                return true;
-        }
-        return false;
+        return -1;
     }
 
     @Override
