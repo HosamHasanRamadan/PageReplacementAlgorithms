@@ -12,7 +12,7 @@ public class PageReplacementAlgorithms {
          Scanner scanner = new Scanner(System.in);
 
          Integer arr []  = new Integer[]
-                 {7,0,1,2,0,3,0,4,2,3,0,3,0,3,2,1,2,0,1,7,0,1};
+                 {7,0,0,1,2,0,3,0,4,2,3,0,3,0,3,2,1,2,0,1,7,0,1};
         Page []pages = new Page[arr.length];
         for (int i = 0; i < arr.length; i++) {
             pages[i] = new Page(arr[i]);
