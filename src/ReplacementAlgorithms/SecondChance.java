@@ -21,28 +21,24 @@ public class SecondChance extends ReplacementAlgorithm {
             return state;
         } else {
             state = true;
-            index = findIndex();
-            pointer = index;
+            findIndex();
             page.setFrameNumber(pointer);
             frames[pointer] = page;
             pointer = (pointer + 1) % numberOfFrames;
             return state;
         }
     }
-    private int  findIndex(){
-        int p = pointer;
-
-        if(frames[p] != null)
+    private void  findIndex(){
+        if(frames[pointer] != null)
         while(true){
-            if(frames[p].getDirtyBit()){
-                frames[p].resetDirtyBit();
-                p = (p+1) % frames.length;
+            if(frames[pointer].getDirtyBit()){
+                frames[pointer].resetDirtyBit();
+                pointer = (pointer+1) % frames.length;
             }
             else {
                 break;
             }
         }
-        return p ;
     }
 
 
