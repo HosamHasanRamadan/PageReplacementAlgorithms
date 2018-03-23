@@ -46,7 +46,7 @@ public class PageReplacementAlgorithms {
             case 1 : algorithm = new FirstInFirstOut(numberOfFrames); break;
             case 2 : algorithm = new Optimal(test.getTestSequance(),numberOfFrames); break;
             case 3 : algorithm = new MostFrequentlyUsed(numberOfFrames); break;
-            case 4 : algorithm = new LeastFrequentlyUsed(numberOfFrames); break;
+            case 4 : algorithm = new Amr.leastFrequentlyUsed(numberOfFrames); break;
             case 5 : algorithm = new SecondChance(numberOfFrames); break;
             case 6 : algorithm = new LeastRecentlyUsed(pages,numberOfFrames); break;
         }
