@@ -4,35 +4,42 @@ import AlgorithmData.*;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Stack;
 
 public class LeastFrequentlyUsed extends ReplacementAlgorithm {
 
     Map<Integer,Integer> map;
     int numberOfFrames;
+    Stack<Page> equalFreqPages;
+    Stack<Page> equalPages;
+    int counter = 0;
 
     public LeastFrequentlyUsed( int numberOfFrames) {
         this.map = new HashMap<>();
         this.numberOfFrames = numberOfFrames;
         frames = new Page[numberOfFrames];
+        equalPages = new Stack<>();
     }
 
     @Override
     public boolean insert(Page page) {
-        //currentPageIndex++;
 
         System.out.print(page.getPageNumber() + "--> ");
         int key = page.getPageNumber();
+        int index = 0 ;
+        counter++;
 
-
-        if(contains(page)) {
+        if((index = contains(page)) != -1 ) {
             int value = map.get(key);
             value++;
+            frames[index].setCount(counter);
             map.replace(key,value);
             state = false;
         }
         else{
             int frameNumber = findFrameNumber();
             page.setFrameNumber(frameNumber);
+            page.setCount(counter);
             frames[frameNumber] = page;
             state = true;
             if(map.containsKey(key))
@@ -46,7 +53,7 @@ public class LeastFrequentlyUsed extends ReplacementAlgorithm {
         return state;
     }
 
-    private int findFrameNumber(){
+    private int findFrameNumber() {
         if (pointer < numberOfFrames)
             if (frames[pointer] == null) {
                 int temp = pointer;
@@ -54,16 +61,27 @@ public class LeastFrequentlyUsed extends ReplacementAlgorithm {
                 return temp;
             }
 
-            int minFreq = Integer.MAX_VALUE ;
-            int frameNumber = 0;
-        for (int count = 0; count < numberOfFrames; count++) {
-                int pageNumber = frames[count].getPageNumber();
-                int pageFreq = map.get(pageNumber);
-                if(pageFreq < minFreq ) {
-                    minFreq = pageFreq;
-                    frameNumber = count;
-                }
+        int minFreq = map.get(frames[0].getPageNumber());
+        int minCount = frames[0].getCount();
+        int frameNumber = 0;
+
+        for (int count = 1; count < numberOfFrames; count++) {
+            Page p = frames[count];
+            int pageNumber = p.getPageNumber();
+            int pageFreq = map.get(pageNumber);
+
+            if (pageFreq < minFreq) {
+                minFreq = pageFreq;
+                frameNumber = count;
+            } else {
+                if (pageFreq == minFreq)
+                    if (p.getCount() < minCount) {
+                        minCount = p.getCount();
+                        frameNumber = count;
+                    }
+            }
         }
+
         return frameNumber;
     }
 
@@ -73,14 +91,15 @@ public class LeastFrequentlyUsed extends ReplacementAlgorithm {
         value++;
         map.replace(key,value);
     }
-    private boolean contains(Page page) {
-        for (Page pageFrame : frames) {
-            if (pageFrame == null)
+    private int contains(Page page) {
+        for (int count = 0; count < frames.length; count++)
+        {
+            if (frames[count] == null)
                 break;
-            if (page.equals(pageFrame))
-                return true;
+            if (page.equals(frames[count]))
+                return count;
         }
-        return false;
+        return -1;
     }
 
     @Override

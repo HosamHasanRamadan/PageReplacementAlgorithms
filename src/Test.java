@@ -31,7 +31,8 @@ public class Test {
 
     }
 
-    public void createTestSequance(){
+    public void createTestSequance(int seed){
+         random.setSeed(seed);
         testSequance = new Page[pagesSequanceLength];
         for(int count = 0 ; count < pagesSequanceLength ; count++ ){
             int pageNumber = random.nextInt(rangeOfPageNumber);
@@ -42,7 +43,7 @@ public class Test {
 
     void randomTest(Algorithm algorithm){
          if(testSequance == null)
-             createTestSequance();
+             createTestSequance(PageReplacementAlgorithms.seed);
 
         algorithm = algorithm ;
         for(int count = 0 ; count < pagesSequanceLength ; count++ ){

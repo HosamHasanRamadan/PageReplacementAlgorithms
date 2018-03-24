@@ -16,6 +16,7 @@ public class PageReplacementAlgorithms {
     static Page[] pages;
     static Algorithm algorithm;
     static Test test;
+    static int seed ;
 
     public static void main(String args[]) {
 
@@ -39,14 +40,14 @@ public class PageReplacementAlgorithms {
             test = new Test(numberOfFrames , pages , 1);
         else {
             test = new Test(numberOfFrames, pagesSequanceLength, rangeOfPageNumber);
-            test.createTestSequance();
+            test.createTestSequance(seed);
         }
 
         switch (x){
             case 1 : algorithm = new FirstInFirstOut(numberOfFrames); break;
             case 2 : algorithm = new AhmedLeader.Optimal(test.getTestSequance(),numberOfFrames); break;
             case 3 : algorithm = new MostFrequentlyUsed(numberOfFrames); break;
-            case 4 : algorithm = new Amr.leastFrequentlyUsed(numberOfFrames); break;
+            case 4 : algorithm = new LeastFrequentlyUsed(numberOfFrames); break;
             case 5 : algorithm = new SecondChance(numberOfFrames); break;
             case 6 : algorithm = new LeastRecentlyUsed(pages,numberOfFrames); break;
         }
@@ -80,6 +81,8 @@ public class PageReplacementAlgorithms {
     }
 
     public static void random() {
+        System.out.println("Enter Seed:");
+        seed = scanner.nextInt();
         System.out.println("Enter Sequance Length :");
         pagesSequanceLength = scanner.nextInt();
         System.out.println("Enter Max Value of Page Number : ");
