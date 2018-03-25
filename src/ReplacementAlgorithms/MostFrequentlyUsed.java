@@ -7,6 +7,7 @@ import AlgorithmData.*;
 public class MostFrequentlyUsed extends ReplacementAlgorithm {
     Map<Integer,Integer> map;
     int numberOfFrames;
+    int counter = 0;
 
     public MostFrequentlyUsed( int numberOfFrames) {
         this.map = new HashMap<>();
@@ -19,17 +20,20 @@ public class MostFrequentlyUsed extends ReplacementAlgorithm {
         System.out.println(map);
         System.out.print(page.getPageNumber() + "--> ");
         int key = page.getPageNumber();
+        counter++;
+        int index = 0;
 
-
-        if(contains(page)) {
+        if((index = contains(page)) != -1) {
             int value = map.get(key);
             value++;
             map.replace(key,value);
+            frames[index].setCount(counter);
             state = false;
         }
         else{
             int frameNumber = findFrameNumber();
             page.setFrameNumber(frameNumber);
+            page.setCount(counter);
             frames[frameNumber] = page;
             state = true;
             if(map.containsKey(key))
@@ -51,15 +55,23 @@ public class MostFrequentlyUsed extends ReplacementAlgorithm {
                 return temp;
             }
 
-        int minFreq = 0 ;
+        int maxFreq = map.get(frames[0].getPageNumber()) ;
         int frameNumber = 0;
-        for (int count = 0; count < numberOfFrames; count++) {
-            int pageNumber = frames[count].getPageNumber();
+        int maxCount = frames[0].getCount();
+
+        for (int count = 1; count < numberOfFrames; count++) {
+            Page p  = frames[count];
+            int pageNumber = p.getPageNumber();
             int pageFreq = map.get(pageNumber);
-            if(pageFreq > minFreq ) {
-                minFreq = pageFreq;
+            if(pageFreq > maxFreq ) {
+                maxFreq = pageFreq;
                 frameNumber = count;
             }
+            if (pageFreq == maxFreq)
+                if (p.getCount() > maxCount) {
+                    maxCount = p.getCount();
+                    frameNumber = count;
+                }
         }
         return frameNumber;
     }
@@ -70,14 +82,15 @@ public class MostFrequentlyUsed extends ReplacementAlgorithm {
         value++;
         map.replace(key,value);
     }
-    private boolean contains(Page page) {
-        for (Page pageFrame : frames) {
-            if (pageFrame == null)
+    private int contains(Page page) {
+        for (int count = 0; count < frames.length; count++)
+        {
+            if (frames[count] == null)
                 break;
-            if (page.equals(pageFrame))
-                return true;
+            if (page.equals(frames[count]))
+                return count;
         }
-        return false;
+        return -1;
     }
 
     @Override

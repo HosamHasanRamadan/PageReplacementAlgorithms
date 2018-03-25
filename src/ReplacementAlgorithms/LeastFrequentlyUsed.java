@@ -10,15 +10,12 @@ public class LeastFrequentlyUsed extends ReplacementAlgorithm {
 
     Map<Integer,Integer> map;
     int numberOfFrames;
-    Stack<Page> equalFreqPages;
-    Stack<Page> equalPages;
     int counter = 0;
 
     public LeastFrequentlyUsed( int numberOfFrames) {
         this.map = new HashMap<>();
         this.numberOfFrames = numberOfFrames;
         frames = new Page[numberOfFrames];
-        equalPages = new Stack<>();
     }
 
     @Override
