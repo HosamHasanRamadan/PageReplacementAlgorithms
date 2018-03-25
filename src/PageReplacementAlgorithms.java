@@ -44,12 +44,12 @@ public class PageReplacementAlgorithms {
         }
 
         switch (x){
-            case 1 : algorithm = new FirstInFirstOut(numberOfFrames); break;
+            case 1 : algorithm = new Rimon.FirstInFirstOut(numberOfFrames); break;
             case 2 : algorithm = new AhmedLeader.Optimal(test.getTestSequance(),numberOfFrames); break;
-            case 3 : algorithm = new MostFrequentlyUsed(numberOfFrames); break;
-            case 4 : algorithm = new LeastFrequentlyUsed(numberOfFrames); break;
-            case 5 : algorithm = new SecondChance(numberOfFrames); break;
-            case 6 : algorithm = new LeastRecentlyUsed(pages,numberOfFrames); break;
+            case 3 : algorithm = new Rimon.MostFrequentlyUsed(numberOfFrames); break;
+            case 4 : algorithm = new Amr.LeastFreqUsedNew(numberOfFrames); break;
+            case 5 : algorithm = new Hosam.SecondChance(numberOfFrames); break;
+            case 6 : algorithm = new Ahmed.LRU(numberOfFrames); break;
         }
 
 
@@ -91,9 +91,10 @@ public class PageReplacementAlgorithms {
 
     public static void test() {
         Integer arr[] = new Integer[]
-                //{0, 4, 1, 4, 2, 4, 3, 4, 2, 4, 0, 4, 1, 4, 2, 4, 3, 4};
-        {7,0,1,2,0,3,0,4,2,3,0,3,0,3,2,1,2,0,1,7,0,1};
-               // {2,3,2,1,5,2,4,5,3,2,5,2};
+                {7,0,1,2,0,3,0,4,2,3,0,3,0,3,2,1,2,0,1,7,0,1};
+                 //{1 ,2 ,3 ,4 ,1 ,2 ,5 ,1 ,2 ,3 ,4 ,5};
+                //{0, 4, 1, 4, 2, 4, 3, 4, 2, 4, 0, 4, 1, 4, 2, 4, 3, 4}; optimal
+
         pages = new Page[arr.length];
         for (int i = 0; i < arr.length; i++) {
             pages[i] = new Page(arr[i]);

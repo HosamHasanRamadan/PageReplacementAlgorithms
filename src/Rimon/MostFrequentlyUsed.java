@@ -1,8 +1,10 @@
-package ReplacementAlgorithms;
+package Rimon;
+
+import AlgorithmData.Algorithm;
+import AlgorithmData.Page;
 
 import java.util.HashMap;
 import java.util.Map;
-import AlgorithmData.*;
 
 public class MostFrequentlyUsed implements Algorithm {
 
@@ -14,7 +16,7 @@ public class MostFrequentlyUsed implements Algorithm {
     protected   int pointer;
 
 
-    public MostFrequentlyUsed( int numberOfFrames) {
+    public MostFrequentlyUsed(int numberOfFrames) {
         this.pagesFreq = new HashMap<>();
         this.numberOfFrames = numberOfFrames;
         frames = new Page[numberOfFrames];
