@@ -1,3 +1,14 @@
+/*
+Sec 1 -  احمد محمد أحمد محمد
+Sec 1 - أحمد هشام مرسي
+Sec 2 - حسام حسن رمضان
+Sec 2 - ريمون إبراهيم ناشد
+Sec 3 -  عمرو عصام الدين عبد العظيم
+
+Java :لغة البرنامج
+ */
+
+
 import AlgorithmData.Algorithm;
 import AlgorithmData.Page;
 import ReplacementAlgorithms.*;
@@ -47,7 +58,7 @@ public class PageReplacementAlgorithms {
             case 1 : algorithm = new Rimon.FirstInFirstOut(numberOfFrames); break;
             case 2 : algorithm = new AhmedLeader.Optimal(test.getTestSequance(),numberOfFrames); break;
             case 3 : algorithm = new Rimon.MostFrequentlyUsed(numberOfFrames); break;
-            case 4 : algorithm = new Amr.LeastFreqUsedNew(numberOfFrames); break;
+            case 4 : algorithm = new LeastFrequentlyUsed(numberOfFrames); break;
             case 5 : algorithm = new Hosam.SecondChance(numberOfFrames); break;
             case 6 : algorithm = new Ahmed.LRU(numberOfFrames); break;
         }
@@ -57,7 +68,8 @@ public class PageReplacementAlgorithms {
 
         test.randomTest(algorithm);
 
-
+        System.out.println("Hit : " + test.getHit());
+        System.out.println("Miss : " + test.getMiss());
 
 
     }
@@ -91,8 +103,8 @@ public class PageReplacementAlgorithms {
 
     public static void test() {
         Integer arr[] = new Integer[]
-                {7,0,1,2,0,3,0,4,2,3,0,3,0,3,2,1,2,0,1,7,0,1};
-                 //{1 ,2 ,3 ,4 ,1 ,2 ,5 ,1 ,2 ,3 ,4 ,5};
+               // {7,0,1,2,0,3,0,4,2,3,0,3,0,3,2,1,2,0,1,7,0,1};
+                 {1 ,2 ,3 ,4 ,1 ,2 ,5 ,1 ,2 ,3 ,4 ,5};
                 //{0, 4, 1, 4, 2, 4, 3, 4, 2, 4, 0, 4, 1, 4, 2, 4, 3, 4}; optimal
 
         pages = new Page[arr.length];

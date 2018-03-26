@@ -73,6 +73,7 @@ public class MostFrequentlyUsed implements Algorithm {
             if(pageFreq > maxFreq ) {
                 maxFreq = pageFreq;
                 frameNumber = count;
+                maxCount = p.getCount();
             }
             else if (pageFreq == maxFreq)
                     if (p.getCount() > maxCount) {

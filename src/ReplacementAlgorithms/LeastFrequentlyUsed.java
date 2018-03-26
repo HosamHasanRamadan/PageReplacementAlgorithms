@@ -70,6 +70,7 @@ public class LeastFrequentlyUsed extends ReplacementAlgorithm {
             if (pageFreq < minFreq) {
                 minFreq = pageFreq;
                 frameNumber = count;
+                minCount = p.getCount();
             } else {
                 if (pageFreq == minFreq)
                     if (p.getCount() < minCount) {

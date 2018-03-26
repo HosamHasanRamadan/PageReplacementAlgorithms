@@ -13,6 +13,8 @@ public class Test {
     private Random random = new Random() ;
 
     private Algorithm algorithm ;
+    private int hit = 0;
+    private int miss = 0 ;
 
     private int numberOfFrames  ;
     private int rangeOfPageNumber ;
@@ -50,7 +52,10 @@ public class Test {
             Page page = testSequance[count];
             boolean cond = algorithm.insert(page);
 
-            if(cond == true) algorithm.print();
+            if(cond == true) {
+                algorithm.print();
+                ++miss;
+            }
             else
                 System.out.println();
         }
@@ -58,5 +63,14 @@ public class Test {
 
     public Page[] getTestSequance() {
         return testSequance;
+    }
+
+    public int getHit() {
+         hit  = pagesSequanceLength - miss ;
+        return hit;
+    }
+
+    public int getMiss() {
+        return miss;
     }
 }
